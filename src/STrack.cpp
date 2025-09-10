@@ -2,7 +2,7 @@
 
 #include <cstddef>
 
-byte_track::STrack::STrack(const Rect<float>& rect, const float& score) :
+byte_track::STrack::STrack(const Rect<float>& rect, const float& score, int label) :
     kalman_filter_(),
     mean_(),
     covariance_(),
@@ -13,7 +13,8 @@ byte_track::STrack::STrack(const Rect<float>& rect, const float& score) :
     track_id_(0),
     frame_id_(0),
     start_frame_id_(0),
-    tracklet_len_(0)
+    tracklet_len_(0),
+    label_(label)
 {
 }
 
@@ -58,6 +59,11 @@ const size_t& byte_track::STrack::getStartFrameId() const
 const size_t& byte_track::STrack::getTrackletLength() const
 {
     return tracklet_len_;
+}
+
+int byte_track::STrack::getLabel() const
+{
+	return label_;
 }
 
 void byte_track::STrack::activate(const size_t& frame_id, const size_t& track_id)
